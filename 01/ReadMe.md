@@ -278,6 +278,7 @@ func createMarkDown(fileName ...string) {
 }
 ```
 ### 3.9 Khai  báo  struct
+Xem [structs/main.go](structs/main.go)
 
 ```go
 package main
@@ -289,6 +290,7 @@ type Person struct {
 	FullName string
 	Email    string
 }
+
 
 func (p Person) String() string {
 	return fmt.Sprintf("%s : %s : %s", p.Id, p.FullName, p.Email)
@@ -313,3 +315,61 @@ func main() {
 	fmt.Println(person)
 }
 ```
+
+Hỏi: Nếu không có hàm này, kết quả in ra thế nào?
+
+```go
+func (p Person) String() string {
+	return fmt.Sprintf("%s : %s : %s", p.Id, p.FullName, p.Email)
+}
+```
+
+Hỏi : Khác biệt giữa hai hàm dưới đây là gì?
+```go
+func (p Person) String() string {
+	return fmt.Sprintf("%s : %s : %s", p.Id, p.FullName, p.Email)
+}
+```
+và
+```go
+
+func (p *Person) String() string {
+	return fmt.Sprintf("%s : %s : %s", p.Id, p.FullName, p.Email)
+}
+```
+
+### 3.10 Composite struct
+Xem 
+```go
+type Address struct {
+	Location string
+	City     string
+	Country  string
+}
+type Person struct {
+	Id       string
+	FullName string
+	Email    string
+	Addr     Address  //Chứa address
+}
+```
+## 4. Bài tập lập trình
+
+### 4.1 Kiểm tra 3 cạnh tam giác
+Nhập vào 3 số bất kỳ a, b, c hãy kiểm tra xem 3 số này có tạo thành cạnh tam giác
+
+### 4.2 Giải phương trình bậc 2
+Nhập vào ba số `a, b, c` kiểu `float64` hãy giải phương trình bậc 2.
+Đặc biệt khi Delta < 0 thì trả về kết quả là [số phức](https://vi.wikipedia.org/wiki/S%E1%BB%91_ph%E1%BB%A9c).
+
+### 4.2 Đoán số
+Máy tính tự sinh ra một số nguyên dương X >= 0 và <= 100.
+Lập trình một vòng lặp để người dùng đoán số.
+- Nếu số đoán lớn hơn X thì in ra "Số bạn đoán lớn hơn X"
+- Nếu số đoán nhỏ hơn X thì in ra "Số bạn đoán nhỏ hơn X"
+- Nếu bằng X thì in ra "Bạn đã đoán đúng"
+
+
+### 4.3 Lập dãy số nguyên tố
+Nhập vào số nguyên dương N < 100,000 hãy trả về mảng các số nguyên tố.
+Gợi ý: [hãy học slice](https://tour.golang.org/moretypes/7)
