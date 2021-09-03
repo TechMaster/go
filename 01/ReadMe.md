@@ -71,6 +71,31 @@ Hello World
 ```
 
 ### 3.2 Đọc từ bàn phím
+Có 3 loại module:
+1. Module chuẩn của Google
+2. Public module chia sẻ cho mọi user
+3. Private module chỉ cho phép những nhân viên hoặc thành viên giới hạn được xem.
+
+Đã phát hành module là chia sẻ tòan bộ mã nguồn.
+
+Để debug thì cần phải tạo module bằng lệnh `go mod init`
+
+Đây là lỗi khi debug mà chưa tạo module
+```
+Build Error: go build -o /Volumes/CODE/go/01/__debug_bin -gcflags all=-N -l .
+go: cannot find main module, but found .git/config in /Volumes/CODE/go
+	to create a module there, run:
+	cd .. && go mod init (exit status 1)
+```
+
+Tạo module
+```
+$ go mod init lab01
+$ go mod tidy
+```
+
+`go mod tidy` dọn dẹp lại các modules
+
 ```go
 package main
 
@@ -96,6 +121,23 @@ You live in Hanoi
 ```
 
 ### 3.3 Khai báo biến
+Có mấy cách:
+
+Khai báo + Gán trong 1 lệnh. Recommeneded
+```go
+height := 1.76
+```
+
+Khai báo và Gán tách thành 2 lệnh. Not Recommended
+```go
+var height float64
+height = 1.76
+```
+
+Tên hàm bắt đầu bằng chữ thường chỉ có phạm vi hoạt động trong nội bộ package - private
+
+Tên hàm bắt đầu bằng chữ hoa có phạm vi hoạt động (scope) trong và ngoài package - public
+
 Ví dụ tính chỉ số BMI
 ```go
 package main
@@ -173,6 +215,60 @@ Gợi ý hãy dùng hàm `strings.Trim***`
 Việc nhập vào chiều cao, cân nặng bản chất là giống nhau.
 Hãy viết hàm để tái sử dụng code nhập dữ liệu.
 
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	var (
+		err    error
+		height float64
+		weight float64
+	)
+
+	height, err = readNumberFromKeyboard("Chiều cao của bạn: ")
+	if err != nil {
+		fmt.Print(err.Error())
+		return
+	}
+
+	weight, err = readNumberFromKeyboard("Cân nặng của bạn :")
+	if err != nil {
+		fmt.Print(err.Error())
+		return
+	}
+	bmi := CalculateBMI(height, weight)
+	fmt.Println("Chỉ số bmi của bạn = ", bmi)
+
+}
+
+/*
+Đọc từ bàn phím và convert string sang float
+*/
+func readNumberFromKeyboard(msg string) (result float64, err error) {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print(msg)
+	str, _ := reader.ReadString('\n')
+	str = strings.TrimSuffix(str, "\n")
+
+	if result, err = strconv.ParseFloat(str, 64); err != nil {
+		return 0.0, err
+	}
+	return result, nil
+}
+
+func CalculateBMI(height float64, weight float64) (index float64) {
+	return weight / (height * height)
+}
+```
+
 ### 3.5 Đánh giá chỉ số BMI bằng lệnh switch
 ```go
 package main
@@ -222,7 +318,7 @@ Obese (Class I)
 Obese (Class III)
 Obese (Class III)
 ```
-
+**Việc sắp xếp các biểu thức trong case cần chú ý theo một chiều ổn định: hoặc tăng dần hoặc giảm dần không là sẽ gặp lỗi logic !**
 
 ### 3.6 Dạng switch dạng tập hợp
 
@@ -353,6 +449,63 @@ type Person struct {
 	Addr     Address  //Chứa address
 }
 ```
+
+### 3.11 Một Person có nhiều địa chỉ Address
+```go
+package main
+
+import "fmt"
+
+type Address struct {
+	Location string
+	City     string
+	Country  string
+}
+type Person struct {
+	Id       string
+	FullName string
+	Email    string
+	Addr     []Address  //Một người có thế có nhiều địa chỉ
+}
+
+func (p Person) String() string {
+	return fmt.Sprintf("{%s : %s : %s} lives at {%s, %s, %s}",
+		p.Id, p.FullName, p.Email, p.Addr.Location, p.Addr.City, p.Addr.Country)
+
+}
+
+func main() {
+	type personRequest struct {
+		FullName string
+		Email    string
+		Location string
+		City     string
+		Country  string
+	}
+
+	pRequest := personRequest{
+		FullName: "Trinh Minh Cuong",
+		Email:    "cuong@techmaster.vn",
+		Location: "12A Viwaseen Tower, 48 Tố Hữu",
+		City:     "Hà nội",
+		Country:  "Việt nam",
+	}
+
+	person := Person{
+		Id:       "ox-13",
+		FullName: pRequest.FullName,
+		Email:    pRequest.Email,
+		Addr: []Address{
+			{
+				Location: pRequest.Location,
+				City:     pRequest.City,
+				Country:  pRequest.Country,
+			}},
+	}
+	fmt.Println(person)
+}
+
+```
 ## 4. Bài tập lập trình
 
 ### 4.1 Kiểm tra 3 cạnh tam giác
@@ -362,7 +515,7 @@ Nhập vào 3 số bất kỳ a, b, c hãy kiểm tra xem 3 số này có tạo 
 Nhập vào ba số `a, b, c` kiểu `float64` hãy giải phương trình bậc 2.
 Đặc biệt khi Delta < 0 thì trả về kết quả là [số phức](https://vi.wikipedia.org/wiki/S%E1%BB%91_ph%E1%BB%A9c).
 
-### 4.2 Đoán số
+### 4.3 Đoán số
 Máy tính tự sinh ra một số nguyên dương X >= 0 và <= 100.
 Lập trình một vòng lặp để người dùng đoán số.
 - Nếu số đoán lớn hơn X thì in ra "Số bạn đoán lớn hơn X"
@@ -370,6 +523,35 @@ Lập trình một vòng lặp để người dùng đoán số.
 - Nếu bằng X thì in ra "Bạn đã đoán đúng"
 
 
-### 4.3 Lập dãy số nguyên tố
+### 4.4 Lập dãy số nguyên tố
 Nhập vào số nguyên dương N < 100,000 hãy trả về mảng các số nguyên tố.
 Gợi ý: [hãy học slice](https://tour.golang.org/moretypes/7)
+
+
+## Golang Best Practice
+
+1. Viết hàm càng ngắn càng tốt < 30 dòng (có thể nhìn toàn bộ func trong một khung màn hình)
+2. Số dòng trong 1 file go < 200 dòng
+3. Hàm nào cũng có comment 
+  ```go
+	/*
+	Mô tả hàm này làm gì
+	Các tham số truyền vào quan trọng
+	Các biến trả về
+	*/
+	func Fibonnaci(n int) int {
+
+	}
+	```
+
+	## Cách thức nộp bài
+
+	1. Hãy tạo github repo
+	2. Chia các thư mục theo ngày đánh số 01, 02, 03, 04, 05
+		```
+		01
+		  - Example1
+			- Example2
+			- HomeWork
+	  ```
+	3. Thầy giáo sẽ vào Github repo để kiểm tra bài tập.

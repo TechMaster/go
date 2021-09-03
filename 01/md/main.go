@@ -10,6 +10,11 @@ func checkError(err error) {
 		panic(err)
 	}
 }
+
+/*
+Tạo file Markdown, nếu không truyền vào fileName thì tạo file ReadMe.md
+nếu truyền vào fileName thì tạo file fileName.md
+*/
 func createMarkDown(fileName ...string) {
 	var filename string
 	if len(fileName) == 0 {
@@ -19,10 +24,14 @@ func createMarkDown(fileName ...string) {
 	}
 
 	f, err := os.Create(filename)
-	defer f.Close()
 	checkError(err)
+	defer f.Close() //hãy đóng file f khi hàm thoát
+
 	_, err = f.WriteString("## Helo MarkDown\n")
 	checkError(err)
+
 	_, err = f.WriteString("### Introduction\n")
-	f.Sync()
+	checkError(err)
+	err = f.Sync()
+	checkError(err)
 }

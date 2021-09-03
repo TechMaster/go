@@ -11,14 +11,10 @@ type Person struct {
 	Id       string
 	FullName string
 	Email    string
-	Addr     Address
+	Addr     []Address  //Một người có thế có nhiều địa chỉ
 }
 
-func (p Person) String() string {
-	return fmt.Sprintf("{%s : %s : %s} lives at {%s, %s, %s}",
-		p.Id, p.FullName, p.Email, p.Addr.Location, p.Addr.City, p.Addr.Country)
 
-}
 
 func main() {
 	type personRequest struct {
@@ -41,11 +37,12 @@ func main() {
 		Id:       "ox-13",
 		FullName: pRequest.FullName,
 		Email:    pRequest.Email,
-		Addr: Address{
-			Location: pRequest.Location,
-			City:     pRequest.City,
-			Country:  pRequest.Country,
-		},
+		Addr: []Address{
+			{
+				Location: pRequest.Location,
+				City:     pRequest.City,
+				Country:  pRequest.Country,
+			}},
 	}
 	fmt.Println(person)
 }
