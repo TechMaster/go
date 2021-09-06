@@ -53,7 +53,7 @@ Trong debug tool bar của VSCode có mấy nút:
 Cần chú ý khung debug
 1. Variables gồm 2 phần: Arguments (tham số truyền vào), Locals (các biến cục bộ trong hàm đang được debug)
 2. Watch: lập trình viên có thể thêm các biểu thức để quan sát
-3. BreakPoints: các điểm dừng do lập trình đặt
+3. BreakPoints: các điểm dừng do lập trình đặt để dừng chương trình
 4. Call Stack: ngăn xếp các hàm chồng lên nhau khi chạy debug
 
 
@@ -67,13 +67,16 @@ cars := [3]string{"Toyota", "Mercedes", "BMW"}
 cars := []string{"Toyota", "Mercedes", "BMW"}
 cars := [...]string{"Toyota", "Mercedes", "BMW"}
 ```
-Khai bảo mảng 2 chiều
+Hai cách khai báo mảng 2 chiều
+
+Không xác định số lượng phần tử trong mảng con
 ```go
 langs := [][]string{{"C#", "C", "Python"},
 		{"Java", "Scala", "Perl"},
 		{"C++", "Go", "RUST", "Crystal", "OCAML"}}
 ```
 
+Xác định số lượng phần tử trong mảng con là 3 ! Kiểm tra lúc compile time.
 ```go
 langs := [][3]string{{"C#", "C", "Python"},
 		{"Java", "Scala", "Perl"},
@@ -93,6 +96,8 @@ func reverseLoop() {
 	}
 }
 ```
+
+Hàm reverse dùng defer này không tối ưu về tốc độ, tốn bộ nhớ
 
 ## 6. slice vs array
 
@@ -142,6 +147,12 @@ Xem [remove_slice_bench_test.go](remove_slice_bench_test.go)
 File test hay benchmark luôn phải kết thúc bằng `test.go` và `import "testing"`
 
 Hàm benchmark luôn phải bắt đầu bằng `func Benchmark`
+
+Hãy liên tục viết hàm benchmark để chọn ra cách tối ưu thực thi. Phong cách của Go là
+- Đơn giản
+- Ngắn gọn
+- Chạy nhanh
+- Tốn ít RAM
 
 ## 9. Truyền slice vào một hàm
 
