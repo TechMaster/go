@@ -137,6 +137,7 @@ Golang cung cấp 2 kỹ thuật:
 2. Benchmark kiểm thử tốc độ thực thi
 
 Chúng ta có thể viết file *test.go nằm trong cùng package hoặc ra thư mục riêng.
+Xem [remove_slice_bench_test.go](remove_slice_bench_test.go)
 
 File test hay benchmark luôn phải kết thúc bằng `test.go` và `import "testing"`
 
@@ -158,7 +159,7 @@ tham chiếu đến cùng một mảng (array). Bất kỳ thay đổi nào lên
 ## 10. Khai báo mảng sử dụng anonymous struct
 Cách này vừa khai báo mảng chứa các struct. Không cần ghi rõ tên struct mà chỉ cần các thuộc tính bên trong struct. Sau khi khai báo xong, thì khởi tạo dữ liệu luôn
 
-
+Xem xem `sortSliceWithFunc()` trong [sort.go](sort.go)
 ```go
 people := []struct {
 		Name string
