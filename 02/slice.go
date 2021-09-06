@@ -73,6 +73,19 @@ func reverseKeepInput(a []string) (reversed []string) {
 }
 
 /*
+Cách này cũng được nhưng code dài dòng. Phong cách của Golang là phải ngắn gọn, chạy nhanh
+tốn ít bộ nhớ. Mọi sự dài dòng đều quy ra tiền cả !
+*/
+func reverseKeepInput2(a []string) []string {
+	reversed := []string{}
+	for i := range a {
+		n := a[len(a)-1-i]
+		reversed = append(reversed, n)
+	}
+	return reversed
+}
+
+/*
 Loại bỏ phần tử lập lại trong slice
 */
 func removeDuplicate(a []string) (result []string) {
