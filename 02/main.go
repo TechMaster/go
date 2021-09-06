@@ -56,4 +56,22 @@ func main() {
 	b = []string{"a", "b", "b", "c", "d", "e", "f", "a"}
 	c = removeDuplicate(b)
 	fmt.Println(c)
+
+	fmt.Println("-----")
+	d := []interface{}{"a", true, 1, "abc", 'e', 3.14}
+	e := reverseSliceAnyType(d)
+	fmt.Println(d)
+	fmt.Println(e)
+
+	fmt.Println("-----")
+	sortIntSlice()
+
+	fmt.Println("-----")
+	sortReverse()
+
+	fmt.Println("-----")
+	sortSliceWithFunc()
+
+	fmt.Println("-----")
+	search()
 }

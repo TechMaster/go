@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func demoSlice() {
 	a := []string{"a", "b", "c", "d"}
@@ -80,6 +82,17 @@ func removeDuplicate(a []string) (result []string) {
 			keys[entry] = true
 			result = append(result, entry)
 		}
+	}
+	return
+}
+
+/*
+Đảo mảng chứa các phần tử có kiểu bất kỳ interface{}
+*/
+func reverseSliceAnyType(a []interface{}) (reversed []interface{}) {
+	for i := range a {
+		n := a[len(a)-1-i]
+		reversed = append(reversed, n)
 	}
 	return
 }
