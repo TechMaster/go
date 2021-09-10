@@ -4,7 +4,8 @@
 Golang không có class mà chỉ có Struct
 - Struct không có tính kế thừa.
 - Go tổ hợp các struct (composition) thay vì kế thừa (inheritance)
-- Struct Golang có method nhưng chúng ta không viết method bên trong Struct như khai báo Class trong Java
+- Struct Golang không có method nhưng có khái niệm receiver. Có 2 loại receiver là Pointer Receiver và Value Receiver. Receiver bản chất là `func`, được viết bên ngoài struct.
+- 
 
 ```go
 type Product struct {
@@ -71,7 +72,9 @@ Tham khảo bài viết [Pointers in Go](https://dave.cheney.net/2014/03/17/poin
 	c := new(int64)	
 	c = b  //Khác kiểu nên không thể gán
 	```
-3. `string` trong go là value type chứ không phải pointer type
+	Golang kiểm tra kiểu con trỏ ngay lúc compile time, do đó nó là type safe pointer (ngăn trường hợp ứng dụng bị crash vì gán sai kiểu)
+
+3. `string` trong go là immutable value type (kiểu giá trị không thay đổi được sau khi khởi tạo) chứ không phải pointer type. Khác với C, C++, string là reference type.
   Xem [pointer.go](pointer.go)
 	```go
 	func modifyString(s string) {
@@ -91,14 +94,46 @@ Tham khảo bài viết [Pointers in Go](https://dave.cheney.net/2014/03/17/poin
 	Inside func s =  oellh
 	Outside func s =  hello
 	```
+	Thực tế khi truyền `func modifyString(s string)` một chuỗi mới được copy rồi truyền vào hàm.
+
+	Để có thể thay đổi được string khi chuyền vào func chúng ta phải làm như sau
+	```go
+	func modifyString2(s *string) {
+		/*	temp := *s
+		*s = temp[len(temp)-1:] + temp[1:len(temp)-1] + temp[:1]*/
+
+		*s = (*s)[len(*s)-1:] + (*s)[1:len(*s)-1] + (*s)[:1]
+		fmt.Println("Inside func s = ", s)
+	}
+	```
+	Cách khác là trả về string thay đổi
+	```go
+	func modifyString3(s string) string {
+		return s[len(s)-1:] + s[1:len(s)-1] + s[:1]
+	}
+	```
+
+	Bạn Bền hỏi trong 3 hàm thay đổi chuỗi này, hàm nào chạy nhanh nhất?
+
+	Trả lời: hãy viết hàm Bencmark ! Kết quả đây
+	```
+	BenchmarkModifyString1-8        44691324                25.58 ns/op
+	BenchmarkModifyString2-8        26154003                41.74 ns/op
+	BenchmarkModifyString3-8        45897848                25.67 ns/op
+	```
+
+	Hoá ra là truyền con trỏ đến chuỗi vào hàm lại chạy chậm. Hy vọng phiên bản kế tiếp Golang sẽ tối ưu được phần này.
+
+	> Lời khuyên của tôi: đừng thay đổi string bằng cách truyền con trỏ *string vừa chậm vừa khó hiểu về cú pháp. Hãy truyền string dạng immutable value và trả về chuỗi thay đổi.
+
 4. Go pointer không có những khái niệm phức tạp như pointer trỏ đến pointer
 
 ### 2.1 Keyword `new` để tạo vùng nhớ để pointer trỏ tới
 
 ```go
-b := new(int)
+b := new(int)  //cấp phát vùng nhớ kiểu *int
 fmt.Printf("b address %p\n", b) //b address 0xc0000c0008
-var c *int
+var c *int     //khai báo biến con trỏ kiểu *int
 fmt.Printf("c address %p\n", c) //c address 0x0
 ```
 Ví dụ trên c chưa được khởi tạo vùng nhớ
@@ -155,8 +190,8 @@ Tham khảo:
 jack := BuildPerson().WithFirstName("Jack").WithLastName("London").WithAge(12)
 ```
 
-## 3. Value receiver vs Pointer Receiver
-Value receiver thay đổi thuộc tính bên trong phương thức thì được, thì kết thúc phương thức thì giá trị ban đầu của struct giữ nguyên.
+## 3. Value Receiver vs Pointer Receiver
+Value receiver không thay đổi giá trị của struct. Thực tế struct sẽ copy ra một struct mới khi truyền vào value receiver
 ```go
 /* Nâng giá sản phẩm lên
 price = price * (1 + percentage/100)
@@ -274,6 +309,11 @@ BenchmarkPointerFindById-8                  2481            453237 ns/op
 Giờ thì pointer lại nhanh hơn value. Vậy phải làm sao bây giờ?
 
 Trả lời: Hãy viết chạy Benchmark ở những hàm quan trọng để chọn phương án tối ưu nhất !
+
+### 3.3 Nên truyền slice dạng value hay pointer
+Nếu chúng ta thay đổi giá trị phần tử trong slice bên trong một hàm, khi ra khỏi hàm, thay đổi này vẫn giữ nguyên. Như vậy, truyền slice vào một hàm bản chất là truyền con trỏ rồi đó. Điều này đúng với bản chất của slice là con trỏ đến cấu trúc array.
+
+Có thể dùng con trỏ slice nhưng việc này không cần thiết và có thể còn chậm hơn việc truyền slice thông thường.
 
 ## 4. func type ~ Kiểu hàm
 
