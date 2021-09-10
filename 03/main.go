@@ -6,5 +6,10 @@ func main() {
 	value.InitData()
 	fmt.Println(*pointer.AccRepo.Accounts[0])
 	fmt.Println(value.AccRepo.Accounts[0])*/
-	DemoOperator()
+	//DemoOperator()
+	//demoStruct()
+	//DemoPointer()
+	//demoProduct()
+	//DemoOperator()
+	demoValueVsPointerSlice()
 }
