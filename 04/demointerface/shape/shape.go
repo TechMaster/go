@@ -1,4 +1,4 @@
-package main
+package shape
 
 import "fmt"
 
@@ -8,11 +8,12 @@ type Shape interface {
 	String() string
 }
 
-func main() {
+func DemoShape() {
 	rec := Rectangle{
 		Width:  10,
 		Height: 20,
 	}
+
 	var shape Shape
 	shape = rec
 	fmt.Println(shape.Area())
@@ -32,5 +33,4 @@ func main() {
 		//Polymorphism
 		fmt.Printf("%s perimeter = %.2f\n", shape, shape.Perimeter())
 	}
-
 }
