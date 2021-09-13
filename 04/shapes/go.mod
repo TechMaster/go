@@ -1,3 +1,3 @@
-module shapes
+module demointerface
 
 go 1.17
