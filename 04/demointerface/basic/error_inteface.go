@@ -32,7 +32,7 @@ func openMissingFile() error {
 	file, err := os.OpenFile("invalid path", os.O_RDWR, 0644)
 
 	if err != nil {
-		return OneMountError{Msg: err.Error(), Division: "OneHousing", Module: "CRM", Func: "openMissingFile", Line: 22}
+		return OneMountError{Msg: err.Error(), Division: "OneHousing", Module: "CRM", Func: "openMissingFile", Line: 32}
 	}
 	defer file.Close()
 	return nil

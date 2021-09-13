@@ -23,13 +23,13 @@ func DemoAnyType() {
 	i = "hello"
 	describe(i)
 
-	person := Person{
+	i = Person{
 		Id:   "OX-13",
 		Name: "Donald Trump",
 	}
-	describe(person) //struct
+	describe(i) //struct
 
-	describe(&person) //pointer to struct
+	describe(&i) //pointer to struct
 
 	describe([]string{"a", "b", "c", "d", "e", "f"})
 	intArray := [3]int{1, 2, 3}
