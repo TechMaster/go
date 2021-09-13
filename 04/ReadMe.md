@@ -1,6 +1,6 @@
 # Chủ đề hôm nay về Interfance
 
-Các bạn hay chạy code ở thư mục [shapes](shapes) trước.
+Các bạn hay chạy code ở thư mục [demointerface](demointerface) trước.
 
 Sau đó chúng sẽ xây dựng chức năng gửi email có nhiều biến thể khác nhau ở [mailer](mailer)
 
