@@ -1,14 +1,14 @@
 package main
 
-import "demointerface/logger"
+import "demointerface/shape"
 
 func main() {
 
-	// shape.DemoShape()
+	shape.DemoShape()
 	// basic.DemoAnyType()
 	// basic.DemoInterfaceTypeAssert()
 	// basic.DemoSwitchType()
 	// basic.DemoStringerInterface()
 	// basic.DemoCustomError()
-	logger.DemoLogger()
+	// logger.DemoLogger()
 }
