@@ -1,0 +1,19 @@
+version: '3.3'
+
+services: 
+  database:
+    image: postgres:12-alpine
+    environment: 
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: postgres
+    ports: 
+      - "5434:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "8181:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 123
