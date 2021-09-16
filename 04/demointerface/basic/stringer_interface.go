@@ -25,10 +25,10 @@ func (p Product) String() string {
 type Point struct{ X, Y float64 }
 type Color struct{ R, G, B int }
 type ColoredPoint struct {
-	// thuộc tính ẩn danh
+	// thuộc tính ẩn danh: anonymous property
 	Point
 
-	// thuộc tính bình thường
+	// thuộc tính bình thường: named property
 	Color Color
 }
 

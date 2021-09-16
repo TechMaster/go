@@ -20,7 +20,7 @@ func DemoInterfaceTypeAssert() {
 	*/
 
 	//Kiểm tra đúng kiểu rồi mới in
-	if f, ok := i.(string); ok {
+	if f, ok := i.(string); ok { //Golang if assignment statement
 		fmt.Println(f)
 	}
 

@@ -3,7 +3,7 @@ package shape
 import "fmt"
 
 type Shape interface {
-	Perimeter() float64
+	Perimeter() float64 //function prototype
 	Area() float64
 	String() string
 }
@@ -16,6 +16,7 @@ func DemoShape() {
 
 	var shape Shape
 	shape = rec
+
 	fmt.Println(shape.Area())
 
 	cir := Circle{
