@@ -16,7 +16,7 @@ var instance *singleton
 
 // Sử dụng hàm khởi tạo
 func GetInstanceFunc() *singleton {
-	if instance == nil {
+	if instance == nil { // Zero value
 		time.Sleep(time.Second)
 		instance = &singleton{ number : 1 }
 	}
@@ -27,6 +27,7 @@ func GetInstanceFunc() *singleton {
 var once sync.Once
 
 func GetInstanceSync() *singleton {
+	//
 	once.Do(func() {
 		instance = &singleton{ number : 1 }
 	})
@@ -49,6 +50,7 @@ func GetInstanceMutex() *singleton {
 // Sử dụng Init của package
 func init() {
 	instance = &singleton{ number: 1}
+	fmt.Println("Singleton init")
 }
 
 func GetInstanceInit() *singleton {

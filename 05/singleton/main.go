@@ -1,6 +1,6 @@
 package main
 
-import "singleton-pattern/config"
+import "singleton-pattern/post"
 
 func main() {
 	// ins1 := singleton.GetInstanceFunc()
@@ -9,12 +9,13 @@ func main() {
 	// fmt.Printf("%p\n", ins1)
 	// fmt.Printf("%p\n", ins2)
 
-	//singleton.DemoGetInstanceFunc()
+	// singleton.DemoGetInstanceFunc()
 	//singleton.DemoGetInstanceCheck()
 	//singleton.DemoGetInstanceMutex()
-	//time.Sleep(time.Second * 5)
 
-	config.DemoConfig()
+	// time.Sleep(time.Second * 5)
+
+	//config.DemoConfig()
 	// database.DemoDatabase()
-	//post.DemoPost()
+	post.DemoPost()
 }

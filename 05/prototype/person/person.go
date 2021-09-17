@@ -19,7 +19,14 @@ func(p *Person) Clone() iPerson{
 		Name: p.Name,
 		Email: p.Email,
 		Age: p.Age,
-		Address: p.Address,
+		Address: p.Address.Clone(),
+	}
+}
+
+func(a Address) Clone() *Address{
+	return &Address{
+		City: a.City,
+		Stress: a.Stress,
 	}
 }
 

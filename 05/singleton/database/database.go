@@ -44,6 +44,7 @@ func DemoDatabase() {
 	db := GetInstance()
 	defer db.Close()
 
+	// Kiểm tra kết nối
 	ctx := context.Background()
 	if err := db.Ping(ctx); err != nil {
 		panic(err)
@@ -52,6 +53,7 @@ func DemoDatabase() {
 	// Tìm kiếm thông tin user
 	var user User
 	err := db.Model(&user).Where("id=?", "1234").Select()
+	// Select * from users where id = '1234'
 
 	if err != nil {
 		fmt.Println("Read Error")
@@ -65,6 +67,10 @@ func DemoDatabase() {
         FullName: "Trần Văn C",
 		Email: "c@gmail.com",
     }).Insert()
+
+	// insert into users
+	// values
+	// ('3333', 'Trần Văn C', 'c@gmail.com')
 
     if err != nil {
         fmt.Println("Insert Error")

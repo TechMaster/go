@@ -1,8 +1,6 @@
 package main
 
-import (
-	"prototype-pattern/person"
-)
+import "prototype-pattern/person"
 
 func main() {
 	// class.BuildClass()

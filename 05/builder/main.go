@@ -1,16 +1,14 @@
 package main
 
-import (
-	"builder-pattern/worker"
-)
+import "builder-pattern/student"
 
 func main() {
 	/* Problem */
-	worker.DemoWorker()
+	// worker.DemoWorker()
 
 	/* Employee */
 	// e.ClientBuildEmployee()
 
 	/* Student */
-	// s.BuildStudent()
+	student.BuildStudent()
 }

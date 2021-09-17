@@ -4,6 +4,7 @@ import "fmt"
 
 func BuildStudent() {
 	student := newStudentBuilder().setName("Nguyễn Văn A").setSex("Nam").setAge(20).getStudent()
+	
 	printDetail(student)
 }
 
