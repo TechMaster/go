@@ -3,6 +3,7 @@ package singleton
 import (
 	"fmt"
 	"sync"
+	"time"
 )
 
 type singleton struct{
@@ -16,7 +17,8 @@ var instance *singleton
 // Sử dụng hàm khởi tạo
 func GetInstanceFunc() *singleton {
 	if instance == nil {
-		instance = &singleton{ number : 1}
+		time.Sleep(time.Second)
+		instance = &singleton{ number : 1 }
 	}
 	return instance
 }
@@ -45,9 +47,9 @@ func GetInstanceMutex() *singleton {
 }
 
 // Sử dụng Init của package
-// func init() {
-// 	instance = &singleton{ number: 1}
-// }
+func init() {
+	instance = &singleton{ number: 1}
+}
 
 func GetInstanceInit() *singleton {
 	return instance

@@ -15,14 +15,14 @@ Mẫu thiết kế này cho phép chúng ta tạo ra những đối tượng ph�
 
 Hình ảnh minh họa về cách triển khai build design pattern
 
-![](./doc/image/builder.png)
+![](./doc/image/builder-uml.png)
 
 Chúng ta có thể thấy, Builder Pattern sẽ gồm có 4 thành phần chính:
 
 - Product : đại diện cho đối tượng cần tạo, đối tượng này phức tạp, có nhiều thuộc tính.
 
-- Builder : là abstract class hoặc interface khai báo phương thức tạo đối tượng.
+- Builder : Định nghĩa interface khai báo phương thức tạo đối tượng.
 
-- ConcreteBuilder : kế thừa Builder và cài đặt chi tiết cách tạo ra đối tượng. Nó sẽ xác định và nắm giữ các thể hiện mà nó tạo ra, đồng thời nó cũng cung cấp phương thức để trả các các thể hiện mà nó đã tạo ra trước đó.
+- ConcreteBuilder : implement Builder và cài đặt chi tiết cách tạo ra đối tượng.
 
 - Director: là nơi sẽ gọi tới Builder để tạo ra đối tượng.

@@ -1,9 +1,10 @@
 package main
 
 import (
-	"prototype-pattern/class"
+	"prototype-pattern/person"
 )
 
 func main() {
-	class.BuildClass()
+	// class.BuildClass()
+	person.BuildPerson()
 }
