@@ -20,5 +20,6 @@ func convert_batch_videos_naive() {
 	for _, video := range videos {
 		go convert_video_mp4_to_hls_naive(video)
 	}
+	time.Sleep(3000 * time.Millisecond)
 	fmt.Printf("Convert xong %d video\n", len(videos))
 }

@@ -24,6 +24,6 @@ func alphabets() {
 func print_numbers_alphabets() {
 	go numbers()
 	go alphabets()
-	time.Sleep(3000 * time.Millisecond)
+	//time.Sleep(3000 * time.Millisecond)
 	fmt.Println("main terminated")
 }

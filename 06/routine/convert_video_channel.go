@@ -26,10 +26,14 @@ func convert_video_mp4_to_hls_ch(input string, wg *sync.WaitGroup, ch chan<- vid
 	} else {
 		err = nil
 	}
-	ch <- video_convert_result{
+	/*ch <- video_convert_result{
 		input: input,
 		err:   err,
-	}
+	}*/
+	handle_error_naive(video_convert_result{
+		input: input,
+		err:   err,
+	})
 }
 
 func convert_batch_videos_ch() {
@@ -66,5 +70,12 @@ func handle_convert_error(ch <-chan video_convert_result) {
 			}
 		}
 	}()
+}
 
+func handle_error_naive(convert_result video_convert_result) {
+	if convert_result.err != nil {
+		fmt.Println(convert_result.err.Error())
+	} else {
+		fmt.Println("convert successfully " + convert_result.input)
+	}
 }

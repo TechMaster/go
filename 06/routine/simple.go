@@ -16,12 +16,12 @@ func f(from string) {
 
 func demoGoRoutineSimple() {
 	f("direct") //Gọi trực tiếp thực thi tuần tự
-
+	foo := "bar"
 	go f("goroutine")
 
 	go func(msg string) {
-		// time.Sleep(8 * time.Millisecond) Hãy thử thêm lệnh này vào
-		fmt.Println(msg)
+		time.Sleep(8 * time.Millisecond) // Hãy thử thêm lệnh này vào
+		fmt.Println(foo + " " + msg)
 	}("going")
 
 	time.Sleep(time.Second)
