@@ -2,6 +2,7 @@ package calendar
 
 import (
 	"fmt"
+	"time"
 )
 
 var (
@@ -24,19 +25,9 @@ var (
 func ShowCalendar(year int, month int) {
 	showHeader(year, month)
 	showWeekDay()
+	showDay(year, month)
 }
 
-/*
-Chiều rộng calendar = 6 * 3 + 2 = 20 ký tự
-space + năm chiếm 4 ký tự
-   September 2021
-Su Mo Tu We Th Fr Sa
-          1  2  3  4
- 5  6  7  8  9 10 11
-12 13 14 15 16 17 18
-19 20 21 22 23 24 25
-26 27 28 29 30
-*/
 func showHeader(year int, month int) {
 	monthName := months[month]
 	padding := (20 - 5 - len(monthName)) / 2
@@ -49,4 +40,42 @@ func showHeader(year int, month int) {
 
 func showWeekDay() {
 	fmt.Println("Su Mo Tu We Th Fr Sa")
+}
+
+func showDay(year int, month int) {
+	// Lấy số ngày trong tháng
+	daysInMonth := getDaysInMonth(year, month)
+
+	// Lấy ngày bắt đầu của tháng
+	startDay := getStartOfMonth(year, month)
+
+	// In ngày bắt đầu của tháng
+	for i := 0; i < startDay; i++ {
+		fmt.Printf("%2s ", " ")
+	}
+
+	// In số ngày trong tháng
+	for i := 1; i <= daysInMonth; i++ {
+		fmt.Printf("%2d ", i)
+		if (i + startDay) % 7 == 0 {
+			fmt.Println()
+		}
+	}
+	fmt.Println()
+}
+
+func Date(year, month, day int) time.Time {
+	return time.Date(year, time.Month(month), day, 0, 0, 0, 0, time.UTC)
+}
+
+// Tính toán ngày bắt đầu của tháng vào thứ mấy trong tuần (0 -> 6)
+func getStartOfMonth(year, month int) int {
+	t := Date(year, month, 1)
+	return int(t.Weekday())
+}
+
+// Tính toán số ngày trong tháng
+func getDaysInMonth(year, month int) int {
+	t := Date(year, month + 1, 0)
+	return t.Day()
 }
