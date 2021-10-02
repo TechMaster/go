@@ -6,7 +6,13 @@ import (
 )
 
 func homeHandle(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Home page"))
+	if r.URL.Path == "/" {
+		w.Write([]byte("Home page"))
+	} else if r.URL.Path == "/about" {
+		w.Write([]byte("About page"))
+	} else {
+		w.Write([]byte("Page not found"))
+	}
 }
 
 func DemoServerDefault() {

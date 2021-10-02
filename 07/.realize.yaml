@@ -1,0 +1,24 @@
+settings:
+  legacy:
+    force: false
+    interval: 0s
+schema:
+- name: "07"
+  path: .
+  commands: 
+    install:
+      status: true
+      method: go build -o tmp/app.out main.go
+    run:
+      status: true
+      method: tmp/app.out
+  watcher:
+    extensions:
+    - go
+    paths:
+    - /
+    ignore:
+      paths:
+      - .git
+      - .realize
+      - vendor

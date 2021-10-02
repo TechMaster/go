@@ -1,0 +1,9 @@
+GET http://localhost:3000/foo HTTP/1.1
+
+###
+
+PUT http://localhost:3000/ HTTP/1.1
+
+###
+
+GET http://localhost:3000/xml HTTP/1.1

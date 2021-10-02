@@ -10,13 +10,17 @@ import (
 )
 
 type student struct {
-	Id   int    `json:"id"`
-	Name string `json:"name"`
+	Id   int    `json:"student_id"`
+	Name string `json:"full_name"`
 }
 
 /* Handle return plain text */
 func returnPlainText(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Home page"))
+	if r.Method == http.MethodPost {
+		w.Write([]byte("Post method"))
+	} else if r.Method == http.MethodPut {
+		w.Write([]byte("Put method"))
+	}
 }
 
 /* Handle return json */
@@ -65,6 +69,7 @@ func returnHtml(w http.ResponseWriter, r *http.Request) {
 				<meta http-equiv="X-UA-Compatible" content="IE=edge">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<title>Books</title>
+				<link rel="stylesheet" href="http://localhost:3000/static/css/style.css">
 			</head>
 			<body>
 				<h1>Những cuốn sách được yêu thích</h1>
@@ -72,6 +77,9 @@ func returnHtml(w http.ResponseWriter, r *http.Request) {
 					<li>Những người khốn khổ</li>
 					<li>Đắc nhân tâm</li>
 				</ul>
+				<img src="http://localhost:3000/static/image/nature.jpg">
+
+				<script src="http://localhost:3000/static/js/main.js"></script>
 			</body>
 		</html>
 	`
@@ -82,8 +90,8 @@ func returnHtml(w http.ResponseWriter, r *http.Request) {
 
 /* Handle return file */
 func returnFile(w http.ResponseWriter, r *http.Request) {
-	filePath := path.Join("view", "index.html")
-	// filePath := path.Join("static/image", "nature.jpg")
+	// filePath := path.Join("view", "index.html")
+	filePath := path.Join("static/image", "nature.jpg")
 
 	http.ServeFile(w, r, filePath)
 }

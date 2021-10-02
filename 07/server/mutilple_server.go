@@ -50,8 +50,10 @@ func DemoMutipleServer() {
 }
 
 func DemoMutipleServerDefault() {
+	fmt.Println("start")
 	server := createServer(3000)
 	fmt.Println(server.ListenAndServe())
+	fmt.Println("done")
 
 	server1 := createServer(3001)
 	fmt.Println(server1.ListenAndServe())
