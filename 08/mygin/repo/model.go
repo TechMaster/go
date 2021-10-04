@@ -18,3 +18,9 @@ type Person struct {
 	Date_of_birth time.Time
 	Addresses     []*fake.AddressInfo
 }
+
+type Book struct {
+	Title  string
+	Author string
+	Pages  int
+}

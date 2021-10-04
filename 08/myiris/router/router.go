@@ -20,6 +20,10 @@ func InitRouter(app *iris.Application) {
 			v2.Get("/"+path, default_handler)
 		}
 		v2.Get("/ox13", default_handler)
+
+		//Only Iris support regex
+		//http://localhost:8080/v2/regex/abc and http://localhost:8080/v2/regex/abc123
+		v2.Get("/regex/{name:string regexp(^[a-z]+)}", default_handler)
 	}
 
 }
