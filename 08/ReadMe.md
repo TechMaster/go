@@ -45,5 +45,23 @@ Vấn đề đặt ra là khi chúng ta vào một tổ chức. Chúng ta luôn 
 > iris hỗ trợ prefork bằng cấu hình `app.Listen(":8080", iris.WithSocketSharding)`
 
 |Tham số      |   gin                |      iris        |    fiber            |
+|-------------|----------------------|------------------|---------------------|
 |/hello       |48717, 51175,52055    |51695,52620,52194 | 69263, 67968, 67908 |
-|/people      |15792, 16582          |20129, 19679      | 27442,27442,27565   |
+|/people      |15792, 16582          |20129, 19679      | 27442, 27442,27565   |
+|/v2/ox13     |41813, 41985          |53195, 57357      | 73772,71642         |
+
+Kết luận:
+1. Một khi đã nắm  vững net/http thì dùng web framework nào cũng dễ
+2. Trong Golang các web framework thường học hỏi cú pháp lẫn nhau, do đó chuyển đổi, port code rất dễ.
+3. Chỉ nên mất khoảng 8 tiếng để học một web framework thôi vì chúng giống nhau đến 85% rồi.
+4. Trong môi trường Docker, Kubernetes, Cloud, cứ web framework nào chạy nhanh, ít tốn RAM, được bảo trì, nâng cấp thường xuyên thì dùng.
+5. Premature optimization is evil. Chỉ tối ưu khi cần thiết và chọn điểm tối ưu nào cho hiệu suất cao nhất, tốn ít chi phí và công sức nhất.
+6. Chúng ta viết REST thường xuyên phải dùng JSON marshall và unmarshall.
+
+
+Các thư viện JSON trong Go:
+1. encoding/JSON (chậm nhất)
+2. jsoniter (nhanh thứ nhì, API khác với thư viện chuẩn)
+3. https://github.com/goccy/go-json (nhanh nhất, API giống y hệt thư viện chuẩn, hãy dùng nó)
+
+

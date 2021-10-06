@@ -2,6 +2,7 @@ package main
 
 import (
 	"myfiber/repo"
+	"myfiber/router"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -20,6 +21,8 @@ func main() {
 	app.Get("/people", func(c *fiber.Ctx) error {
 		return c.JSON(repo.ListPeople())
 	})
+
+	router.InitRouter(app)
 
 	_ = app.Listen(":8080")
 }
