@@ -7,10 +7,8 @@ import (
 	"time"
 
 	"gopgexample/goccy"
-	"gopgexample/model"
 
 	"github.com/go-pg/pg/v10"
-	"github.com/go-pg/pg/v10/orm"
 	"github.com/go-pg/pg/v10/pgjson"
 )
 
@@ -42,7 +40,7 @@ func init() {
 	random = rand.New(s1)
 
 	//Đăng ký bảng quan hệ nhiều - nhiều
-	orm.RegisterTable((*model.MemberClub)(nil))
+	//orm.RegisterTable((*model.MemberClub)(nil))
 }
 
 type dbLogger struct{}
