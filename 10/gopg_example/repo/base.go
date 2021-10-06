@@ -53,6 +53,6 @@ func (d dbLogger) BeforeQuery(c context.Context, q *pg.QueryEvent) (context.Cont
 // Hàm hook chạy sau khi query được thực thi
 func (d dbLogger) AfterQuery(c context.Context, q *pg.QueryEvent) error {
 	bytes, _ := q.FormattedQuery()
-	fmt.Println("After query " + string(bytes))
+	fmt.Println(string(bytes))
 	return nil
 }
