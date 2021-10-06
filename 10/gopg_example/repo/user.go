@@ -1,5 +1,7 @@
 package repo
 
+import "gopgexample/model"
+
 /*
 Sinh ngẫu nhiên các roles trả về mảng int và string.
 Mảng string dùng cho enum
