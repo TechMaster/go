@@ -100,3 +100,8 @@ Không dùng primary key, khi tìm kiếm sẽ phải dùng đến Sequential Sc
 Dùng primary key, khi tìm kiếm sẽ dùng Index Scan. Thực sự hiệu suất khi số lượng bản ghi lớn
 ![](images/dung_pkey.jpg)
 
+## Bài tập về nhà:
+
+1. Thực hành tất cả [những lệnh SQL trong bài viết này](https://techmaster.vn/posts/36773/gioi-thieu-cac-cau-truy-van-trong-postgesql-qua-cac-vi-du)
+2. Làm quen với [thao tác JSON trong Postgresql](https://techmaster.vn/posts/36775/thao-tac-json-trong-postgresql)
+
