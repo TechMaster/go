@@ -1,6 +1,7 @@
 package repo
 
 import (
+	"github.com/go-pg/pg/v10"
 	gonanoid "github.com/matoous/go-nanoid/v2"
 )
 
@@ -20,4 +21,15 @@ func int_in_array(a int, int_arr []int) bool {
 		}
 	}
 	return false
+}
+
+/*
+Kiểm tra err khác nil thì rollback transaction
+*/
+func check_err(err error, trans *pg.Tx) bool {
+	if err != nil {
+		_ = trans.Rollback()
+		return false
+	}
+	return true
 }

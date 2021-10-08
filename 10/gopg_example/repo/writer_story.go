@@ -8,7 +8,7 @@ import (
 )
 
 /*
-Tạo bảng tạm Writer và Story
+Tạo bảng tạm Writer và Story quan hệ 1:1
 */
 func createSchema() error {
 	models := []interface{}{
