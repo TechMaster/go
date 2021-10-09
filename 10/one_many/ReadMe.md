@@ -7,4 +7,5 @@ Quan hệ 1:M có thể thấy ở các ví dụ:
 - Một người (person) có nhiều địa chỉ (addresses)
 - Một đơn hàng (order) có nhiều dòng mặt hàng (line_items)
 
-## Thực hành hãy chạy các hàm test trong file [foo_bar_test.go](test/foo_bar_test.go)
+## Thực hành
+Hãy chạy tuần tự các hàm test trong file [foo_bar_test.go](test/foo_bar_test.go)
