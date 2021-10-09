@@ -1,4 +1,4 @@
-module gopgexample
+module gopgdemo
 
 go 1.17
 

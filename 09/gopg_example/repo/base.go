@@ -6,7 +6,7 @@ import (
 	"math/rand"
 	"time"
 
-	"gopgexample/goccy"
+	"gopgdemo/goccy"
 
 	"github.com/go-pg/pg/v10"
 	"github.com/go-pg/pg/v10/pgjson"
@@ -38,6 +38,11 @@ func init() {
 	//Khởi động engine sinh số ngẫu nhiên
 	s1 := rand.NewSource(time.Now().UnixNano())
 	random = rand.New(s1)
+
+	//Tạo bảng theo định nghĩa model
+	if err := CreateSchema(); err != nil {
+		panic(err)
+	}
 
 	//Đăng ký bảng quan hệ nhiều - nhiều
 	//orm.RegisterTable((*model.MemberClub)(nil))

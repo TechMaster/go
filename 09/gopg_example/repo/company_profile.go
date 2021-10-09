@@ -2,7 +2,7 @@ package repo
 
 import (
 	"fmt"
-	"gopgexample/model"
+	"gopgdemo/model"
 )
 
 func Create_company_profile() (err error) {

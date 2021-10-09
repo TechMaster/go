@@ -2,7 +2,7 @@ package test
 
 import (
 	"fmt"
-	"gopgexample/repo"
+	"gopgdemo/repo"
 	"testing"
 
 	"github.com/go-pg/pg/v10"
@@ -26,7 +26,7 @@ func Test_array(t *testing.T) {
 	fmt.Println(dst)
 }
 
-//	
+//
 func Test_hstore(t *testing.T) {
 	src := map[string]string{"hello": "world", "foo": "bar"}
 	var dst map[string]string

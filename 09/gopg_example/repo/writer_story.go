@@ -2,37 +2,14 @@ package repo
 
 import (
 	"fmt"
-	"gopgexample/model"
-
-	"github.com/go-pg/pg/v10/orm"
+	"gopgdemo/model"
 )
 
 /*
 Tạo bảng tạm Writer và Story quan hệ 1:1
 */
-func createSchema() error {
-	models := []interface{}{
-		(*model.Writer)(nil),
-		(*model.Story)(nil),
-	}
-
-	for _, model := range models {
-		err := DB.Model(model).CreateTable(&orm.CreateTableOptions{
-			Temp: true, //Tạo temporary table chỉ có hiệu lực trong session
-		})
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
 
 func Create_writer_story() (err error) {
-	err = createSchema()
-	if err != nil {
-		return err
-	}
-
 	writer1 := &model.Writer{
 		Name:   "admin",
 		Emails: []string{"cuong@techmaster.vn", "minhcuong@gmail.com"},

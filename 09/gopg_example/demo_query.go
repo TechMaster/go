@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"gopgexample/model"
-	"gopgexample/repo"
+	"gopgdemo/model"
+	"gopgdemo/repo"
 
 	"github.com/brianvoe/gofakeit/v6"
 )
@@ -40,6 +40,5 @@ func createUser() {
 	repo.DB.Model(model.User{
 		Id:   repo.NewID(),
 		Name: gofakeit.Name(),
-		
 	})
 }

@@ -1,7 +1,7 @@
 package repo
 
 import (
-	"gopgexample/model"
+	"gopgdemo/model"
 
 	"github.com/brianvoe/gofakeit/v6"
 	"github.com/go-pg/pg/v10"

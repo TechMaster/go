@@ -1,13 +1,13 @@
 package test
 
 import (
-	"gopgexample/repo"
+	"gopgdemo/repo"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_writer_story(t *testing.T) {
-	err := repo.Create_writer_story()
+func Test_create_film_book(t *testing.T) {
+	err := repo.Create_films_books()
 	assert.Nil(t, err)
 }
