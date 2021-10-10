@@ -65,3 +65,14 @@ func Test_find_shared_roles_of_users(t *testing.T) {
 	fmt.Println(roles)
 	assert.Nil(t, err)
 }
+
+func Test_add_role_to_user(t *testing.T) {
+	roles := []int{5, 4, 8}
+	err := repo.Add_role_to_user("_1jtuhNr", roles)
+	assert.Nil(t, err)
+}
+
+func Test_remove_role_from_user(t *testing.T) {
+	err := repo.Remove_role_from_user("_1jtuhNrs", 6)
+	assert.Nil(t, err)
+}
