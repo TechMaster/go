@@ -35,18 +35,20 @@ Techmaster là một trung tâm đào tạo CNTT. Techmaster cung cấp những 
 
 5. Bảng `course` cũng có 2 cột: `master_id` references `course_master.id`, `version` integer tăng mỗi khi admin, sales tạo phiên bản bản mới.
 
-6. Cần tạo một phiên bản mới `track` hay `course` trong nhưng trường hợp sau:
+6. Cần tạo một phiên bản mới `track` hay `course` trong những trường hợp sau:
    - Gỡ bỏ một course ra khỏi track hoặc thêm một course hoàn toàn mới vào track
    - Thay đổi số buổi rất lớn rút ngắn hoặc tăng trên 5 buổi học ảnh hưởng đến học phí
 
 7. Cần lưu lịch sử giá ra một bảng độc lập `prices`. Bảng này có thể lưu giá của bất kỳ sản phẩm, dịch vụ nào. Đảm bảo tính mở rộng trong tương lai.
 
-8.  Lưu số buổi thành một trường `lesson` trong bảng `course`: , từ đó tính được học phí dự tính `cp_price` (viết computed price) = lesson * 250,000
+8.  Lưu số buổi thành một trường `lesson` trong bảng `course`: , từ đó tính được học phí dự tính `base_price = lesson * 250,000`
 
 9.  Lưu thứ tự hiển thị course trong track vào trường `display_order` trong bảng `track_course`. Mỗi lần thêm, xoá khoá học ra khỏi course.
 
 10. Admin, sales có thể soạn nháp track, hay course. Web site sẽ không hiển thị bản nháp.
-Web site chỉ hiển thị bản nháp được chuyển trạng thái từ `draft` sang `active`. Có nghĩa là version mới nhất sẽ chỉ tính những bản ghi `active`, bỏ qua các trạng thái `draft`, `hidden`, `remove`
+Web site chỉ hiển thị bản `active`. Có nghĩa là version mới nhất sẽ chỉ tính những bản ghi `active`, bỏ qua các trạng thái `draft`, `hidden`, `remove`
+
+11. Các trường `name, description, price, base_price` được lưu dư thừa ở bảng `track`, `course` giúp truy vấn nhanh hơn.
 
 
 
