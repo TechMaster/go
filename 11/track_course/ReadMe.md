@@ -23,33 +23,29 @@ Techmaster là một trung tâm đào tạo CNTT. Techmaster cung cấp những 
 
 
 ## Phân tích thiết kế
+
+![](images/diagram.jpg)
 1. Bảng `track_master` lưu thông tin hiện thời của track để trình bày lên web site. Còn bảng `track` lưu tất cả các phiên bản thay đổi lớn của lộ trình. Quan hệ `track_master` với `track` là 1:M
 
 2. Bảng `course_master` lưu thông tin hiện thời của course để trình bày lên web site. Còn bảng `course` lưu tất cả các phiên bản đổi lớn của course. Quan hệ `course_master` với `course` là 1:M
 
 3. Quan hệ `track-course` sẽ là M:M (nhiều : nhiều). Bảng trung gian sẽ là `track_course`. 
 
-4. Primary key id của `track_master` và `course_master` là chuỗi dài 5 ký tự sinh bởi go nanoid
+4. Bảng `track` có thêm 2 cột: `track_master_id` references `track_master.id`, `version` integer tăng mỗi khi admin, sales tạo phiên bản bản mới.
 
-5. Primary key `track` và `course`là dạng text gồm 2 phần
-      - Phần đầu 5 ký tự: là Primary key id của `track_master` hoặc `course_master`
-      - Phần đuôi 3 ký tự là chữ số chạy từ `000` đến `999`
+5. Bảng `course` cũng có 2 cột: `course_master_id` references `course_master.id`, `version` integer tăng mỗi khi admin, sales tạo phiên bản bản mới.
 
-6. Bảng `track` có thêm 2 cột: `track_master_id` references `track_master.id`, `version` lưu 3 ký tự là chữ số chạy từ `000` đến `999`. Việc này giúp thuận lợi trong việc join các bảng truy vấn.
-
-7. Bảng `course` cũng có 2 cột: `course_master_id` references `course_master.id`, `version` lưu 3 ký tự là chữ số chạy từ `000` đến `999`
-
-8. Cần tạo một phiên bản mới `track` hay `course` trong nhưng trường hợp sau:
+6. Cần tạo một phiên bản mới `track` hay `course` trong nhưng trường hợp sau:
    - Gỡ bỏ một course ra khỏi track hoặc thêm một course hoàn toàn mới vào track
    - Thay đổi số buổi rất lớn rút ngắn hoặc tăng trên 5 buổi học ảnh hưởng đến học phí
 
-9. Cần lưu lịch sử giá ra một bảng độc lập `prices`. Bảng này có thể lưu giá của bất kỳ sản phẩm, dịch vụ nào. Đảm bảo tính mở rộng trong tương lai.
+7. Cần lưu lịch sử giá ra một bảng độc lập `prices`. Bảng này có thể lưu giá của bất kỳ sản phẩm, dịch vụ nào. Đảm bảo tính mở rộng trong tương lai.
 
-10. Lưu số buổi thành một trường `lesson` trong bảng `course`: , từ đó tính được học phí dự tính `cp_price` (viết computed price) = lesson * 250,000
+8.  Lưu số buổi thành một trường `lesson` trong bảng `course`: , từ đó tính được học phí dự tính `cp_price` (viết computed price) = lesson * 250,000
 
-11. Lưu thứ tự hiển thị course trong track vào trường `display_order` trong bảng `track_course`. Mỗi lần thêm, xoá khoá học ra khỏi course.
+9.  Lưu thứ tự hiển thị course trong track vào trường `display_order` trong bảng `track_course`. Mỗi lần thêm, xoá khoá học ra khỏi course.
 
-12. Admin, sales có thể soạn nháp track, hay course. Web site sẽ không hiển thị bản nháp.
+10. Admin, sales có thể soạn nháp track, hay course. Web site sẽ không hiển thị bản nháp.
 Web site chỉ hiển thị bản nháp được chuyển trạng thái từ `draft` sang `active`. Có nghĩa là version mới nhất sẽ chỉ tính những bản ghi `active`, bỏ qua các trạng thái `draft`, `hidden`, `remove`
 
 
