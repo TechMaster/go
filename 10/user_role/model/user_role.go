@@ -7,7 +7,7 @@ type User struct { //Tên Entity --> biên thành snake_case trong Postgresql
 	Email      string
 	Mobile     string
 	Int_roles  []int    `pg:"int_roles,array"`  //Quy ước IntRoles --> int_roles snake case
-	Enum_roles []string `pg:"enum_roles,array"` //kiểu cột là array lưu string
+	Enum_roles []string `pg:"enum_role,array"` //kiểu cột là array lưu string
 }
 
 type User_Role struct {

@@ -23,7 +23,7 @@ func init() {
 		Addr:     "localhost:5432",
 		User:     "postgres",
 		Password: "123",
-		Database: "dvdrental",
+		Database: "demo",
 	})
 
 	//Log các câu lệnh SQL thực thi để debug
