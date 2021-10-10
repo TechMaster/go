@@ -20,10 +20,10 @@ Hàm init này luôn chạy đầu tiên của package repo
 func init() {
 	//Mở kết nối vào CSDL Postgresql
 	DB = pg.Connect(&pg.Options{
-		Addr:     "45.118.144.96:5432",
-		User:     "code123",
-		Password: "123456",
-		Database: "demo",
+		Addr:     "localhost:5432",
+		User:     "postgres",
+		Password: "123",
+		Database: "dvdrental",
 	})
 
 	//Log các câu lệnh SQL thực thi để debug
