@@ -9,6 +9,7 @@ import (
 	"track_course/model"
 )
 
+
 func Create_new_course(name string, desc string) (course *model.Course, err error) {
 	course = &model.Course{
 		Id:          NewID(),

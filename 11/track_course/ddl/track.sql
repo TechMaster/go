@@ -10,7 +10,8 @@ CREATE TABLE test.track (
 	version int,
 	name text NOT NULL,
 	description text NOT NULL,
-	base_price int, -- gi	á tính toán
+	status int NOT NULL,
+	base_price int, -- giá tính toán theo số buổi x học phí
 	price int, -- giá đề xuất sẽ hiển thị lên web site
 	lessons int, -- số lượng lesson = tổng các khoá học thành phần
 	created_date timestamp without time zone default (now()) -- ngày tạo phiên bản này

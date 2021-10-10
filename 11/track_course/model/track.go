@@ -10,6 +10,7 @@ type Track struct {
 	Version     int  `pg:",use_zero"`
 	Name        string
 	Description string
+	Status      int       `pg:",use_zero"`
 	BasePrice   int       `pg:",use_zero"`
 	Price       int       `pg:",use_zero"`
 	Lessons     int       `pg:",use_zero"`
