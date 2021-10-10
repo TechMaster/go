@@ -31,9 +31,9 @@ Techmaster là một trung tâm đào tạo CNTT. Techmaster cung cấp những 
 
 3. Quan hệ `track-course` sẽ là M:M (nhiều : nhiều). Bảng trung gian sẽ là `track_course`. 
 
-4. Bảng `track` có thêm 2 cột: `track_master_id` references `track_master.id`, `version` integer tăng mỗi khi admin, sales tạo phiên bản bản mới.
+4. Bảng `track` có thêm 2 cột: `master_id` references `track_master.id`, `version` integer tăng mỗi khi admin, sales tạo phiên bản bản mới.
 
-5. Bảng `course` cũng có 2 cột: `course_master_id` references `course_master.id`, `version` integer tăng mỗi khi admin, sales tạo phiên bản bản mới.
+5. Bảng `course` cũng có 2 cột: `master_id` references `course_master.id`, `version` integer tăng mỗi khi admin, sales tạo phiên bản bản mới.
 
 6. Cần tạo một phiên bản mới `track` hay `course` trong nhưng trường hợp sau:
    - Gỡ bỏ một course ra khỏi track hoặc thêm một course hoàn toàn mới vào track
