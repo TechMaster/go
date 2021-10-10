@@ -25,30 +25,28 @@ Techmaster là một trung tâm đào tạo CNTT. Techmaster cung cấp những 
 ## Phân tích thiết kế
 
 ![](images/diagram.jpg)
-1. Bảng `track_master` lưu thông tin hiện thời của track để trình bày lên web site. Còn bảng `track` lưu tất cả các phiên bản thay đổi lớn của lộ trình. Quan hệ `track_master` với `track` là 1:M
+1. Bảng `track` có 2 trường đặc biệt là `master_id` và `is_master`. Lần đầu tiên khi tạo một track mới hoàn toàn, hệ thống cần sinh thêm một unique id gán vào `master_id`. Các phiên bản chỉnh sửa track được gán `id` mới, nhưng sẽ vẫn giữ nguyên giá trị `master_id`. Như vậy `master_id` dùng để gom các phiên bản track khác nhau, nhưng cùng một gốc lại. Gợi ý dùng `GROUP BY` hoặc `PARTITION OVER` theo truòng `master_id`.
 
-2. Bảng `course_master` lưu thông tin hiện thời của course để trình bày lên web site. Còn bảng `course` lưu tất cả các phiên bản đổi lớn của course. Quan hệ `course_master` với `course` là 1:M
+2. Admin, sales chọn 1 bản ghi trong nhóm track cùng một gốc để hiển thị ra ngoài web site bán hàng bằng cách set `is_master = true`, đặt lại `is_master = false` cho tất cả các record còn lại. Một khi đã đặt `is_master = true` thì `status=active`.
 
-3. Quan hệ `track-course` sẽ là M:M (nhiều : nhiều). Bảng trung gian sẽ là `track_course`. 
+3. Cột `track.version : int`  tăng mỗi khi admin, sales tạo phiên bản bản mới.
 
-4. Bảng `track` có thêm 2 cột: `master_id` references `track_master.id`, `version` integer tăng mỗi khi admin, sales tạo phiên bản bản mới.
+4. Cột `course.version : int` tăng mỗi khi admin, sales tạo phiên bản bản mới.
 
-5. Bảng `course` cũng có 2 cột: `master_id` references `course_master.id`, `version` integer tăng mỗi khi admin, sales tạo phiên bản bản mới.
-
-6. Cần tạo một phiên bản mới `track` hay `course` trong những trường hợp sau:
+5. Cần tạo một phiên bản mới `track` hay `course` trong những trường hợp sau:
    - Gỡ bỏ một course ra khỏi track hoặc thêm một course hoàn toàn mới vào track
    - Thay đổi số buổi rất lớn rút ngắn hoặc tăng trên 5 buổi học ảnh hưởng đến học phí
 
+6. Quan hệ `track-course` sẽ là M:M (nhiều : nhiều). Bảng trung gian sẽ là `track_course`. Lưu thứ tự hiển thị course trong track vào trường `display_order` trong bảng `track_course`. Mỗi lần thêm, xoá khoá học ra khỏi course.
+
 7. Cần lưu lịch sử giá ra một bảng độc lập `prices`. Bảng này có thể lưu giá của bất kỳ sản phẩm, dịch vụ nào. Đảm bảo tính mở rộng trong tương lai.
 
-8.  Lưu số buổi thành một trường `lesson` trong bảng `course`: , từ đó tính được học phí dự tính `base_price = lesson * 250,000`
+8.  Lưu số buổi thành một trường `lesson` trong bảng `course`: , từ đó tính được học phí dự tính `base_price = lesson * 250,000`. Trường `base_price` không hiển thị ra giao diện, nó chỉ để tham chiếu nội bộ.
 
-9.  Lưu thứ tự hiển thị course trong track vào trường `display_order` trong bảng `track_course`. Mỗi lần thêm, xoá khoá học ra khỏi course.
+9.  Trường `price` là thể hiện ra ngoài. Trường `discount` là số tiền giảm trực tiếp. không dùng giảm theo phần trăm, tính lẻ, khó làm tròn.
 
 10. Admin, sales có thể soạn nháp track, hay course. Web site sẽ không hiển thị bản nháp.
-Web site chỉ hiển thị bản `active`. Có nghĩa là version mới nhất sẽ chỉ tính những bản ghi `active`, bỏ qua các trạng thái `draft`, `hidden`, `remove`
-
-11. Các trường `name, description, price, base_price` được lưu dư thừa ở bảng `track`, `course` giúp truy vấn nhanh hơn.
+Web site chỉ hiển thị bản `active`.
 
 
 
