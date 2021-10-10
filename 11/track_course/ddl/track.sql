@@ -8,7 +8,7 @@ CREATE TABLE test.track (
 	master_id text,
 	is_master  bool NOT NULL,
 	version int,
-	name text NOT NULL UNIQUE,
+	name text NOT NULL,
 	description text NOT NULL,
 	base_price int, -- gi	á tính toán
 	price int, -- giá đề xuất sẽ hiển thị lên web site
