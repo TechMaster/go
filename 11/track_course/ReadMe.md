@@ -18,13 +18,16 @@ Techmaster là một trung tâm đào tạo CNTT. Techmaster cung cấp những 
 - Chương trình khuyến mại của Techmaster sẽ giảm giá theo phần trăm (percentage %) trên học phí hoặc giảm số tiền cụ thể (amount) trên học phí.
 - Làm sao thiết kế hệ thống để Techmaster bây giờ bán track, course, nhưng trong tương lai có thể bán các dịch vụ sản phẩm khác mà chức năng bán hàng trực tuyến không phải thay đổi, code lại quá nhiều.
 - Một track kéo dài trong 6-9 tháng. Trong khi một track chưa kết thúc, nhưng Techmaster cần phải điều chỉnh lại track ví dụ như tăng giảm số buổi đáng kể, thêm khoá học mới, bỏ khoá học cũ. Phải xử lý thế nào với các sinh viên đang học dở track cũ không bị thay đổi track mới, họ vẫn nhìn được nội dung track cũ khi họ đăng ký - nhập học. Với sinh viên mới thì sẽ thấy track mới: hấp dẫn hơn, cạnh tranh hơn. Đây là thách thức gặp phải ở nhiều nghiệp vụ khác nhau: phải lưu lại các phiên bản dịch vụ, mặt hàng theo thời gian chứ không phải có phiên bản mới là xoá cũ sẽ gây rối loạn và nhiều tranh cãi đáng tiếc. Tương tự với course cũng vậy. Tuy là một course, nhưng theo thời gian, đội ngũ giảng viên có thể nâng cấp, cập nhật.
+- Hệ thống chỉ hiển thị ra cho khách hàng, lộ trình - khoá học phiên bản mới nhất và có trạng thái active. Nhưng phiên bản mới hơn, nhưng đang soạn nháp thì không hiển thị.
+- Phía back end, hệ thống sẽ hiển thị track_master cùng với tất cả các phiên bản track liên quan, course_master với tất cả các phiên bản course liên quan.
+
 
 ## Phân tích thiết kế
 1. Bảng `track_master` lưu thông tin hiện thời của track để trình bày lên web site. Còn bảng `track` lưu tất cả các phiên bản thay đổi lớn của lộ trình. Quan hệ `track_master` với `track` là 1:M
 
 2. Bảng `course_master` lưu thông tin hiện thời của course để trình bày lên web site. Còn bảng `course` lưu tất cả các phiên bản đổi lớn của course. Quan hệ `course_master` với `course` là 1:M
 
-3. Quan hệ track-course sẽ là M:M (nhiều : nhiều). Bảng trung gian sẽ là `track_course`.
+3. Quan hệ `track-course` sẽ là M:M (nhiều : nhiều). Bảng trung gian sẽ là `track_course`. 
 
 4. Primary key id của `track_master` và `course_master` là chuỗi dài 5 ký tự sinh bởi go nanoid
 
@@ -38,14 +41,18 @@ Techmaster là một trung tâm đào tạo CNTT. Techmaster cung cấp những 
 
 8. Cần tạo một phiên bản mới `track` hay `course` trong nhưng trường hợp sau:
    - Gỡ bỏ một course ra khỏi track hoặc thêm một course hoàn toàn mới vào track
-   - Thay đổi số buổi rất lớn giảm hoặc tăng trên 5 buổi học ảnh hưởng đến chi phí
+   - Thay đổi số buổi rất lớn rút ngắn hoặc tăng trên 5 buổi học ảnh hưởng đến học phí
 
 9. Cần lưu lịch sử giá ra một bảng độc lập `prices`. Bảng này có thể lưu giá của bất kỳ sản phẩm, dịch vụ nào. Đảm bảo tính mở rộng trong tương lai.
 
 10. Lưu số buổi thành một trường `lesson` trong bảng `course`: , từ đó tính được học phí dự tính `cp_price` (viết computed price) = lesson * 250,000
 
-11. Lưu thứ tự hiển thị course trong track vào trường `display_order` trong bảng `track_course`. Mỗi lần thêm, xoá khoá học ra khỏi course
+11. Lưu thứ tự hiển thị course trong track vào trường `display_order` trong bảng `track_course`. Mỗi lần thêm, xoá khoá học ra khỏi course.
+
+12. Admin, sales có thể soạn nháp track, hay course. Web site sẽ không hiển thị bản nháp.
+Web site chỉ hiển thị bản nháp được chuyển trạng thái từ `draft` sang `active`. Có nghĩa là version mới nhất sẽ chỉ tính những bản ghi `active`, bỏ qua các trạng thái `draft`, `hidden`, `remove`
 
 
-## Các hàm 
+
+
  
