@@ -3,7 +3,7 @@ package repo
 import "track_course/model"
 
 func Find_track_by_name(name string) (track *model.Track, err error) {
-	track = new(model.Track)
+
 	err = DB.Model(track).Where("name ILIKE ? AND ", "%"+name+"%").Limit(1).Select()
 	if err != nil {
 		return nil, err

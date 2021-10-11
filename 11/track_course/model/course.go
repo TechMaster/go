@@ -7,7 +7,8 @@ type Course struct {
 	Id          string   `pg:"id,pk"`
 	MasterId    string
 	IsMaster    bool `pg:",use_zero"`
-	Version     int  `pg:",use_zero"`
+	Status      int
+	Version     int `pg:",use_zero"`
 	Name        string
 	Description string
 	Lessons     int       `pg:",use_zero"`
