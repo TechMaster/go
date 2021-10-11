@@ -21,3 +21,12 @@ func Find_track_by_id(id string) (track *model.Track, err error) {
 	}
 	return track, nil
 }
+
+/*
+Truyền vào bất kỳ track_id nào, lấy master_id rồi lấy max_version
+Chú ý chỉ lấy những track có trạng thái active
+lastes_track_id là track_id tương ứng version mới nhất
+*/
+func Get_max_version_track(track_id string) (max_version int, lastes_track_id string, err error) {
+	return 0, "", nil
+}

@@ -28,18 +28,5 @@ func Create_new_track(name string, desc string) (track *model.Track, err error) 
 	}
 }
 
-/*
-Truyền vào bất kỳ track_id nào, lấy master_id rồi lấy max_version
-Chú ý chỉ lấy những track có trạng thái active
-lastes_track_id là track_id tương ứng version mới nhất
-*/
-func Get_max_version_track(track_id string) (max_version int, lastes_track_id string, err error) {
-	return 0, "", nil
-}
 
-/*
-Clone từ một track có sẵn ra một trac
-*/
-func Clone_new_version_of_track(track_id string) (err error) {
-	return nil
-}
+
