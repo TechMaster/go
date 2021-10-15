@@ -26,7 +26,6 @@ func DemoCreate() {
 
 	// Tạo đối tượng với các trường được chỉ định
 	tx.Select("Id", "FullName", "Email", "CardId").Create(&model.Student{
-		Id:       util.NewID(),
 		FullName: gofakeit.Animal(),
 		Email:    gofakeit.Email(),
 		Phone:    gofakeit.Phone(),
@@ -55,6 +54,13 @@ func DemoCreate() {
 	}
 
 	tx.Create(&students)
+
+	// Tạo đối tượng với struct
+	DB.Model(&model.Student{}).Create(map[string]interface{}{
+		"Id":       util.NewID(),
+		"FullName": gofakeit.Animal(),
+		"Email":    gofakeit.Email(),
+	})
 
 	tx.Rollback()
 }

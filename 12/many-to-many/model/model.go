@@ -18,3 +18,15 @@ type MemberClub struct {
 	ClubId   string `gorm:"primaryKey" column:"club_id"`
 	Active   bool
 }
+
+func(m *Member) TableName() string {
+	return "member"
+}
+
+func(c *Club) TableName() string {
+	return "club"
+}
+
+func(mc *MemberClub) TableName() string {
+	return "member_club"
+}

@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS db.student;
+
 -- db.student definition
 CREATE TABLE db.student (
   id varchar(10) NOT NULL,

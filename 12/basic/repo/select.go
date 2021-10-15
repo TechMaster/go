@@ -16,12 +16,16 @@ func DemoSelect() {
 
 	// Tìm kiếm theo khóa chính
 	DB.First(&model.Student{}, "2")
-	DB.First(&model.Student{}, "id = ?")
+	DB.First(&model.Student{}, "id = ?", "2")
 
 	// Tìm kiếm theo danh sách khóa chính
-	DB.First(&model.Student{}, []string{"2", "3", "4"})
+	DB.Find(&[]model.Student{}, []string{"2", "3", "4"})
 
 	// Lấy tất cả bản ghi trong bảng
 	var students []model.Student
 	DB.Find(&students)
+
+	// Condition
+	DB.Where("full_name = ?", "bob").First(&model.Student{})
+	
 }

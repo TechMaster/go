@@ -23,3 +23,14 @@ func GetMemberByName(db *gorm.DB, name string) (member model.Member, err error) 
 	}
 	return member, nil
 }
+
+/*
+Bài tập về nhà
+1. Sửa tên 1 thành viên trong members
+2. Sửa tên club
+3. Xóa 1 thành viên
+4. Kiểm tra mỗi thành viên tham gia bao nhiêu câu lạc bộ
+5. Kiểm tra mỗi câu lạc bộ được tham gia bởi bao nhiêu thành viên
+6. Xóa member theo id (hoặc name)
+*/ 
+
