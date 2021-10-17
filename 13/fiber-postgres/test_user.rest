@@ -1,0 +1,36 @@
+// Lấy danh sách user
+GET http://localhost:3000/users HTTP/1.1
+
+###
+
+// Lấy thông tin user theo ID
+GET http://localhost:3000/users/Banz0qMS HTTP/1.1
+
+###
+
+// Tạo user mới
+POST http://localhost:3000/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "full_name" : "gam",
+    "email" : "abc@gmail.com",
+    "phone" : "123456789"
+}
+
+###
+
+// Cập nhật thông tin user
+PUT http://localhost:3000/users/Banz0qMS HTTP/1.1
+Content-Type: application/json
+
+{
+    "full_name" : "gam1",
+    "email" : "465@gmail.com",
+    "phone" : ""
+}
+
+###
+
+// Xóa user
+DELETE http://localhost:3000/users/Banz0qMS
