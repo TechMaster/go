@@ -59,39 +59,3 @@ func Test_DeleteUser(t *testing.T) {
 	err := repo.DeleteUser("CPFiKLvh")
 	assert.Nil(t, err)
 }
-
-func Benchmark_GetAllUser(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		_, _ = repo.GetAllUser()
-	}
-}
-
-func Benchmark_GetUserById(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		_, _ = repo.GetUserById("OwhzVBMO")
-	}
-}
-
-func Benchmark_CreateUser(b *testing.B) {
-	req := &model.CreateUser{
-		FullName: gofakeit.Animal(),
-		Phone:    gofakeit.Phone(),
-		Email:    gofakeit.Email(),
-	}
-
-	for i := 0; i < b.N; i++ {
-		_, _ = repo.CreateUser(req)
-	}
-}
-
-func Benchmark_UpdateUser(b *testing.B) {
-	req := &model.CreateUser{
-		FullName: gofakeit.Animal(),
-		Phone:    gofakeit.Phone(),
-		Email:    gofakeit.Email(),
-	}
-
-	for i := 0; i < b.N; i++ {
-		_, _ = repo.UpdateUser("CPFiKLvh", req)
-	}
-}
