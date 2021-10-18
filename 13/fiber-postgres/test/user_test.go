@@ -20,7 +20,7 @@ func Test_GetAllUser(t *testing.T) {
 }
 
 func Test_GetUserById(t *testing.T) {
-	user, err := repo.GetUserById("OwhzVBMO")
+	user, err := repo.GetUserById("JpwUSxHf")
 	assert.Nil(t, err)
 
 	// In ra thông tin của user
@@ -43,12 +43,12 @@ func Test_CreateUser(t *testing.T) {
 
 func Test_UpdateUser(t *testing.T) {
 	req := &model.CreateUser{
-		FullName: "Hien",
+		FullName: "Nguyen Van A",
 		Phone:    gofakeit.Phone(),
 		Email:    gofakeit.Email(),
 	}
 
-	user, err := repo.UpdateUser("CPFiKLvh", req)
+	user, err := repo.UpdateUser("vJxd3kW6", req)
 	assert.Nil(t, err)
 
 	// In ra thông tin của user
@@ -56,6 +56,42 @@ func Test_UpdateUser(t *testing.T) {
 }
 
 func Test_DeleteUser(t *testing.T) {
-	err := repo.DeleteUser("CPFiKLvh")
+	err := repo.DeleteUser("vJxd3kW6")
 	assert.Nil(t, err)
+}
+
+func Benchmark_GetAllUser(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_, _ = repo.GetAllUser() // 1104, 1093, 1077 || 1449, 1446, 1446
+	}
+}
+
+func Benchmark_GetUserById(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_, _ = repo.GetUserById("JpwUSxHf") // 541, 574, 589 || 1497, 1502, 1508
+	}
+}
+
+func Benchmark_CreateUser(b *testing.B) {
+	req := &model.CreateUser{
+		FullName: gofakeit.Animal(),
+		Phone: gofakeit.Phone(),
+		Email: gofakeit.Email(),
+	}
+
+	for i := 0; i < b.N; i++ {
+		_, _ = repo.CreateUser(req) // 206, 219, 217 || 1452, 1467, 1459
+	}
+}
+
+func Benchmark_UpdateUser(b *testing.B) {
+	req := &model.CreateUser{
+		FullName: gofakeit.Animal(),
+		Phone: gofakeit.Phone(),
+		Email: gofakeit.Email(),
+	}
+
+	for i := 0; i < b.N; i++ {
+		_, _ = repo.UpdateUser("JpwUSxHf", req) // 308, 288, 306 || 1396, 1418, 1407
+	}
 }

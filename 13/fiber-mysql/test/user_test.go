@@ -59,3 +59,39 @@ func Test_DeleteUser(t *testing.T) {
 	err := repo.DeleteUser("9--_58z6")
 	assert.Nil(t, err)
 }
+
+func Benchmark_GetAllUser(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_, _ = repo.GetAllUser() // 1104, 1093, 1077
+	}
+}
+
+func Benchmark_GetUserById(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_, _ = repo.GetUserById("6jflpdcT") // 541, 574, 589
+	}
+}
+
+func Benchmark_CreateUser(b *testing.B) {
+	req := &model.CreateUser{
+		FullName: gofakeit.Animal(),
+		Phone: gofakeit.Phone(),
+		Email: gofakeit.Email(),
+	}
+
+	for i := 0; i < b.N; i++ {
+		_, _ = repo.CreateUser(req) // 206, 219, 217
+	}
+}
+
+func Benchmark_UpdateUser(b *testing.B) {
+	req := &model.CreateUser{
+		FullName: gofakeit.Animal(),
+		Phone: gofakeit.Phone(),
+		Email: gofakeit.Email(),
+	}
+
+	for i := 0; i < b.N; i++ {
+		_, _ = repo.UpdateUser("6jflpdcT", req) // 308, 288, 306
+	}
+}

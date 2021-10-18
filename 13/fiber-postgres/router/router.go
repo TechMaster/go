@@ -10,7 +10,7 @@ func InitRouter(app *fiber.App) {
 	// User router
 	app.Get("/users", controller.GetAllUser)
 	app.Post("/users", controller.CreateUser)
-	app.Get("/users/:id", controller.GetUserById)
+	app.Get("/users/:id", controller.GetUserById) // /users/123
 	app.Put("/users/:id", controller.UpdateUser)
 	app.Delete("/users/:id", controller.DeleteUser)
 

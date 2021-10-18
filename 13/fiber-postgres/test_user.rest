@@ -1,0 +1,32 @@
+GET http://localhost:3000/users HTTP/1.1
+
+###
+
+GET http://localhost:3000/users/JpwUSxHf HTTP/1.1
+
+
+###
+
+POST http://localhost:3000/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "full_name" : "Ngo Van B",
+    "email" : "b@gmail.com",
+    "phone" : "0123456789"
+}
+
+###
+
+PUT http://localhost:3000/users/HPD0-A2N HTTP/1.1
+Content-Type: application/json
+
+{
+    "full_name" : "Tran Thi C",
+    "email" : "c@gmail.com",
+    "phone" : ""
+}
+
+###
+
+DELETE http://localhost:3000/users/HPD0-A2N HTTP/1.1

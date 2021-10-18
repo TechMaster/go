@@ -10,7 +10,7 @@ import (
 )
 
 func Test_GetPostsOfUser(t *testing.T) {
-	posts, err := repo.GetPostsOfUser("j2B5GYRa")
+	posts, err := repo.GetPostsOfUser("degz_G9v")
 	assert.Nil(t, err)
 
 	// In ra thông tin danh sách post của user
@@ -20,7 +20,7 @@ func Test_GetPostsOfUser(t *testing.T) {
 }
 
 func Test_GetPostDetail(t *testing.T) {
-	post, err := repo.GetPostDetail("j2B5GYRa", "cs0hSegU")
+	post, err := repo.GetPostDetail("degz_G9v", "W3k_aV4F")
 	assert.Nil(t, err)
 
 	// In ra thông tin của post
@@ -33,7 +33,7 @@ func Test_CreatePost(t *testing.T) {
 		Content:  gofakeit.LoremIpsumSentence(200),
 	}
 
-	userId := "j2B5GYRa"
+	userId := "degz_G9v"
 
 	post, err := repo.CreatePost(userId, req)
 	assert.Nil(t, err)
@@ -44,12 +44,12 @@ func Test_CreatePost(t *testing.T) {
 
 func Test_UpdatePost(t *testing.T) {
 	req := &model.CreatePost{
-		Title:    "Post 2 update",
+		Title:    "Post 3 update",
 		Content:  gofakeit.LoremIpsumSentence(200),
 	}
 
-	userId := "j2B5GYRa"
-	postId := "CUHDEesq"
+	userId := "degz_G9v"
+	postId := "7mE04tSE"
 
 	post, err := repo.UpdatePost(userId, postId, req)
 	assert.Nil(t, err)
@@ -59,8 +59,8 @@ func Test_UpdatePost(t *testing.T) {
 }
 
 func Test_DeletePost(t *testing.T) {
-	userId := "j2B5GYRa"
-	postId := "CUHDEesq"
+	userId := "degz_G9v"
+	postId := "7mE04tSE"
 
 	err := repo.DeletePost(userId, postId)
 	assert.Nil(t, err)

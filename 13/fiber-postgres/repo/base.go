@@ -33,6 +33,18 @@ func ConnectDatabase() *pg.DB {
 	return DB
 }
 
+/*
+Gọi func ConnectDatabase nếu thực hiện test repo
+
+Cách 1:
+var _ = ConnectDatabase()
+
+Cách 2:
+func init() {
+	var _ = ConnectDatabase()
+}
+*/
+
 type dbLogger struct{}
 
 // Hàm hook (móc câu vào lệnh truy vấn) để in ra câu lệnh SQL query

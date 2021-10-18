@@ -8,7 +8,7 @@ CREATE TABLE db.users (
     updated_at TIMESTAMP
 )
 
-DROP TABLE IF EXISTS tdbest.posts
+DROP TABLE IF EXISTS db.posts
 CREATE TABLE db.posts (
 	id varchar(10) PRIMARY KEY,
 	title varchar(500),
