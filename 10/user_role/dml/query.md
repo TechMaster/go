@@ -132,7 +132,7 @@ SELECT u."name", r.id, r."name" FROM
 test.users u 
 INNER JOIN test.user_role ur ON u.id = ur.user_id 
 INNER JOIN test.roles r ON ur.role_id = r.id
-WHERE r.id IN 2
+WHERE r.id IN (2)
 ```
 
 |name|id|name|

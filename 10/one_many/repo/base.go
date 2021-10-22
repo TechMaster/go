@@ -37,6 +37,13 @@ func init() {
 
 type dbLogger struct{}
 
+/* Tuân thủ interface
+type QueryHook interface {
+	BeforeQuery(context.Context, *QueryEvent) (context.Context, error)
+	AfterQuery(context.Context, *QueryEvent) error
+}
+*/
+
 // Hàm hook (móc câu vào lệnh truy vấn) để in ra câu lệnh SQL query
 func (d dbLogger) BeforeQuery(c context.Context, q *pg.QueryEvent) (context.Context, error) {
 	return c, nil

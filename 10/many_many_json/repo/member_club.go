@@ -78,11 +78,18 @@ Thêm thành viên vào một club
 */
 func Assign_members_to_club(transaction *pg.Tx, club *model.Club, members []*model.Member) (err error) {
 	for _, member := range members {
-		membership := model.MemberShip{
-			MemberId: member.Id,
-			ClubId:   club.Id,
+		memberInfo := model.MemberInfo{
+			Id:       member.Id,
+			Name:     member.Name,
 			IsActive: random.Intn(2) == 1, //random true or false
 		}
+
+		clubInfo := model.ClubInfo{
+			Id:       club.Id,
+			Name:     club.Name,
+			IsActive: memberInfo.IsActive,
+		}
+
 		upsert_membership(&club.Memberships, membership)
 		_, err = transaction.Model(club).Column("memberships").WherePK().Update()
 		if !check_err(err, transaction) {

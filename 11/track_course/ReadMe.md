@@ -47,8 +47,3 @@ Techmaster là một trung tâm đào tạo CNTT. Techmaster cung cấp những 
 
 10. Admin, sales có thể soạn nháp track, hay course. Web site sẽ không hiển thị bản nháp.
 Web site chỉ hiển thị bản `active`.
-
-
-
-
- 

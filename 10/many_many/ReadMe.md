@@ -31,3 +31,8 @@ type MemberClub struct {
 ```go
 orm.RegisterTable(&model.MemberClub{})
 ```
+
+## Bài tập
+
+1. Xoá một thành viên ra khỏi club
+2. Thay đổi trạng thái membership

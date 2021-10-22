@@ -1,10 +1,10 @@
-DROP TABLE IF EXISTS test.member;
+DROP TABLE IF EXISTS test.member cascade;
 CREATE TABLE test.member (
   id text PRIMARY key,
   name text NOT NULL 
 );
 
-DROP TABLE IF EXISTS test.club;
+DROP TABLE IF EXISTS test.club cascade;
 CREATE TABLE test.club (
   id text PRIMARY key,
   name text NOT NULL 
