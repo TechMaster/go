@@ -12,8 +12,8 @@ import (
 Định nghĩa một struct AppError mới
 */
 type AppError struct {
-	trace string
-	err   error
+	trace string //Lưu calling stack trace
+	err   error  //thực sự lưu lỗi
 }
 
 // Nó tuân thủ interface của Error vậy có thể trả về nhưng error bình thường
@@ -56,6 +56,9 @@ func (e *AppError) StackTrace() (string, error) {
 	return buf.String(), nil
 }
 
+/*
+Thêm lỗi đồng thời bổ xung tên hàm, tên file, dòng số bao nhiêu vào biến trace
+*/
 func AppendStackTrace(err error) *AppError {
 	if err == nil {
 		panic("nil error provided")
@@ -63,7 +66,7 @@ func AppendStackTrace(err error) *AppError {
 
 	var buf bytes.Buffer
 
-	frame := getFrame(2) //Bỏ qua hàm AppendStackTrace và getFrame
+	frame := getFrame(0) //Bỏ qua hàm AppendStackTrace và getFrame
 
 	fmt.Fprintf(&buf, "%s", frame.File)
 	fmt.Fprintf(&buf, ":%d", frame.Line)

@@ -36,5 +36,7 @@ func check_error_type() {
 	}
 }
 func main() {
-	check_error_type()
+	///check_error_type()
+	///simple_print()
+	print_stack_trace()
 }

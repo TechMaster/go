@@ -14,13 +14,23 @@ func main() {
 }
 
 //Lỗi ngoài cùng
-func testOne() error {
-	return fmt.Errorf("testOne: %w", error_stack.AppendStackTrace(testTwo()))
+func testOne() (err error) {
+	err = testTwo()
+	if err != nil {
+		return fmt.Errorf("testOne: %w", error_stack.AppendStackTrace(err))
+	} else {
+		return nil
+	}
 
 }
 
-func testTwo() error {
-	return fmt.Errorf("testTwo: %w", error_stack.AppendStackTrace(testThree()))
+func testTwo() (err error) {
+	err = testThree()
+	if err != nil {
+		return fmt.Errorf("testTwo: %w", error_stack.AppendStackTrace(err))
+	} else {
+		return nil
+	}
 }
 
 //Lỗi trong cùng

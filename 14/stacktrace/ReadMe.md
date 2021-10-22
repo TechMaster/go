@@ -11,8 +11,9 @@ Thường các hàm gọi liên tiếp nhau, thì lỗi cần hiển thị hàm 
 Để làm được việc này cần 
 ```go
 runtime.Caller(calldepth)
-runtime.FuncForPC(pc)
+runtime.FuncForPC(pc) //Program Counter !
 ```
+
 
 `runtime.Caller(calldepth)`
 tham số calldepth: bỏ qua N hàm bên trên call stack. Ví dụ N = 2 thì bỏ qua
