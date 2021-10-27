@@ -1,0 +1,18 @@
+2021 10 25-11:31:13 - Cannot connect to database
+	repo.Get_books | /Volumes/CODE/go/15/uselogger/repo/book.go | 10
+	controller.Get_books | /Volumes/CODE/go/15/uselogger/controller/book.go | 18
+	context.(*Context).Do | /Users/techmaster/golang/pkg/mod/github.com/kataras/iris/v12@v12.2.0-alpha4.0.20211013142751-e2f40ca06e5e/context/context.go | 490
+{"host":"localhost","port":"5432"}
+
+2021 10 25-11:33:45 - Cannot connect to database
+	repo.Get_books | /Volumes/CODE/go/15/uselogger/repo/book.go | 10
+	controller.Get_books | /Volumes/CODE/go/15/uselogger/controller/book.go | 18
+	context.(*Context).Do | /Users/techmaster/golang/pkg/mod/github.com/kataras/iris/v12@v12.2.0-alpha4.0.20211013142751-e2f40ca06e5e/context/context.go | 490
+{"host":"localhost","port":"5432"}
+
+2021 10 25-11:37:37 - Cannot connect to database
+	repo.Get_books | /Volumes/CODE/go/15/uselogger/repo/book.go | 10
+	controller.Get_books | /Volumes/CODE/go/15/uselogger/controller/book.go | 18
+	context.(*Context).Do | /Users/techmaster/golang/pkg/mod/github.com/kataras/iris/v12@v12.2.0-alpha4.0.20211013142751-e2f40ca06e5e/context/context.go | 490
+{"host":"localhost","port":"5432"}
+
