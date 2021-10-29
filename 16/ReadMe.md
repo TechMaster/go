@@ -52,4 +52,113 @@ Phiên bản Traefik mới nhất tại tháng 10/2021 hỗ trợ:
 - Router Metrics
 - Consul Connect
 
-## 
+## Traefik căn bản
+### 1. Entry Point định nghĩa cổng vào (port number)
+Entry Point để hứng các request dạng TCP hoặc UDP. Phổ biến là 80 (http), 443 (https), 8080 (dashboard)
+![](https://doc.traefik.io/traefik/assets/img/entrypoints.png)
+```yaml
+services:
+  gateway:
+    image: traefik:v2.5
+    ports:      
+      - "80:80"
+      - "8080:8080"
+```
+
+hoặc
+```yaml
+services:
+  gateway:
+    image: traefik:v2.5
+    networks:
+      - techmaster
+    command:
+      - '--entryPoints.web.address=:80'
+      - '--entryPoints.api.address=:9999'
+      - "--entrypoints.websecure.address=:443"
+```
+
+### 2. Routers (chuyển hướng)
+![](https://doc.traefik.io/traefik/assets/img/routers.png)
+
+Cấu hình sử dụng file provider
+```yaml
+http:
+  routers:
+    to-whoami:
+      rule: "Host(`localhost`) && PathPrefix(`/whoami`)"
+      middlewares:
+        - test-user
+      service: whoami-dockerprovider@docker
+```
+Cấu hình sử dụng Docker label
+```yaml
+  mainsite:
+    build: mainsite
+    image: mainsite:latest
+    labels:
+      - "traefik.http.routers.mainsite.rule=Host(`iris.com`)"
+      - "traefik.http.services.mainsite.loadbalancer.server.port=9001"
+    depends_on:
+      - "redis"
+```
+
+### 3. Service dịch vụ phía sau Traefik
+![](https://doc.traefik.io/traefik/assets/img/services.png)
+
+```yaml
+services:
+  main:
+    image: registry.techmaster.com/mainsite:latest
+    networks:
+      - techmaster
+      - techmaster_backend     
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.main.rule=Host(`techmaster.com`)"
+        - "traefik.http.services.main.loadbalancer.server.port=8079" 
+        - "traefik.docker.network=techmaster"
+
+  admin:
+    image: registry.techmaster.com/techmaster-admin-side:latest
+    networks:
+      - techmaster
+      - techmaster_backend 
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.admin.rule=Host(`techmaster.com`) && PathPrefix(`/admin`)"
+        - "traefik.http.services.admin.loadbalancer.server.port=8081" 
+        - "traefik.docker.network=techmaster"        
+
+  teacher:
+    image: registry.techmaster.com/techmaster-teacher-side:latest
+    networks:
+      - techmaster
+      - techmaster_backend       
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.teacher.rule=Host(`techmaster.com`) && PathPrefix(`/teacher`)"
+        - "traefik.http.services.teacher.loadbalancer.server.port=8082" 
+        - "traefik.docker.network=techmaster"
+
+  user:
+    image: registry.techmaster.com/techmaster-user-side:latest
+    networks:
+      - techmaster
+      - techmaster_backend     
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.user.rule=Host(`techmaster.com`) && PathPrefix(`/user`)"
+        - "traefik.http.services.user.loadbalancer.server.port=8086" 
+        - "traefik.docker.network=techmaster"
+```
+
+### 4. Middleware xử lý trung gian
+![](https://doc.traefik.io/traefik/assets/img/middleware/overview.png)
+
+Ví dụ về Forward Auth middleware
+![](forward_auth.jpg)
