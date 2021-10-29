@@ -162,3 +162,16 @@ services:
 
 Ví dụ về Forward Auth middleware
 ![](forward_auth.jpg)
+
+### 5. Tích hợp SSL Lets Encrypt vào Traefik
+[Tích hợp Lets Encrypt vào Traefik V2.5+](https://techmaster.vn/posts/36749/tich-hop-lets-encrypt-vao-traefik-v2-5)
+
+## Các bài lab thực hành Traefik
+
+1. [Sử dụng File Provider](https://github.com/TechMaster/LearnTraefik/tree/main/FileProvider)
+2. [Sử dụng Docker Provider](https://github.com/TechMaster/LearnTraefik/tree/main/DockerProvider)
+3. [ForwardAuth middleware](https://github.com/TechMaster/LearnTraefik/tree/main/ForwardAuth)
+4. [Gateway Authentication sử dụng Session - Cookie](https://github.com/TechMaster/LearnTraefik/tree/main/ForwardAuth)
+5. [Gateway Roled Based Access Control Auth](https://github.com/TechMaster/LearnTraefik/tree/main/GatewayRBAC)
+6. [Bảo mật Traefik Dashboard](https://github.com/TechMaster/LearnTraefik/tree/main/SecureDashBoard)
+7. [Google OAuth Authentication](https://github.com/TechMaster/LearnTraefik/tree/main/GoogleForwardAuth)
